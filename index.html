@@ -2,49 +2,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HTML + JS Runner with Console</title>
+<title>Code Runner with Console</title>
 <style>
+
+body {
+  font-family: Arial, sans-serif;
+}
+
 textarea {
   width: 100%;
-  height: 250px;
+  height: 200px;
   font-family: monospace;
+  font-size: 14px;
 }
-iframe {
+
+.container {
+  display: flex;
   width: 100%;
-  height: 300px;
-  border: 1px solid #aaa;
+  margin-top: 15px;
+  gap: 10px;
 }
+
+.output-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .console-box {
+  flex: 1;
   background: #000;
   color: #0f0;
   padding: 10px;
-  height: 150px;
+  height: 350px;
   overflow-y: auto;
   font-family: monospace;
-  margin-top: 10px;
+  font-size: 14px;
+  border: 1px solid #444;
+}
+
+iframe {
+  height: 350px;
+  width: 100%;
+  border: 1px solid #aaa;
 }
 </style>
 </head>
 <body>
 
-<h2>HTML + JavaScript Runner</h2>
+<h2>Introduce here your code</h2>
 
 <textarea id="code">
-<h1>Hello</h1>
-<script>
-  document.body.style.backgroundColor = "lightyellow";
-  console.log("Ejecutando JS dentro del iframe!");
-</script>
 </textarea>
 
 <br>
-<button onclick="run()">Ejecutar</button>
+<button onclick="run()">Run</button>
 
-<h3>Salida:</h3>
-<iframe id="output"></iframe>
 
-<h3>Consola:</h3>
-<div id="console" class="console-box"></div>
+  
+<div class="container">
+  
+  <div class="output-box">
+    <h3>Output</h3>
+    <iframe id="output"></iframe>
+  </div>
+  
+  <div class="output-box">
+    <h3>Console</h3>
+    <div id="console" class="console-box"></div>
+  </div>
+
+</div>
 
 <script>
 function run() {
@@ -52,9 +80,8 @@ function run() {
     const iframe = document.getElementById("output");
     const doc = iframe.contentDocument || iframe.contentWindow.document;
     const consoleBox = document.getElementById("console");
-    consoleBox.innerHTML = ""; // limpiar consola
+    consoleBox.innerHTML = ""; //clean console
 
-    // HTML + consola personalizada en el iframe
     const html = `
       <script>
         const parentConsole = parent.document.getElementById("console");
