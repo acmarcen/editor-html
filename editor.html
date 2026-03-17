@@ -3,31 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <title>HTML + JS Runner</title>
+<style>
+textarea {
+  width: 100%;
+  height: 250px;
+  font-family: monospace;
+  font-size: 14px;
+}
+iframe {
+  width: 100%;
+  height: 350px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+</style>
 </head>
 <body>
 
 <h2>HTML + JavaScript Runner</h2>
 
-<textarea id="code" style="width:100%;height:220px;font-family:monospace;">
+<p>Pega aquí tu código HTML + JS:</p>
+
+<textarea id="code">
 <h1>Hello</h1>
 <script>
-console.log("JS is running!");
+  document.body.style.backgroundColor = "lightyellow";
+  console.log("Ejecutando JS dentro del iframe!");
 </script>
 </textarea>
 
 <br><br>
-<button onclick="run()">Run</button>
+<button onclick="run()">Ejecutar</button>
 
-<iframe id="out" style="width:100%;height:350px;border:1px solid #999;"></iframe>
+<iframe id="output"></iframe>
 
 <script>
 function run() {
-    const html = document.getElementById("code").value;
-    const iframe = document.getElementById("out");
+    const code = document.getElementById("code").value;
+    const iframe = document.getElementById("output");
     const doc = iframe.contentDocument || iframe.contentWindow.document;
 
+    // Escribimos el HTML directamente dentro del iframe
     doc.open();
-    doc.write(html);
+    doc.write(code);
     doc.close();
 }
 </script>
