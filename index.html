@@ -2,27 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HTML + JS Runner</title>
+<title>HTML + JS Runner with Console</title>
 <style>
 textarea {
   width: 100%;
   height: 250px;
   font-family: monospace;
-  font-size: 14px;
 }
 iframe {
   width: 100%;
-  height: 350px;
-  border: 1px solid #ccc;
-  margin-top: 20px;
+  height: 300px;
+  border: 1px solid #aaa;
+}
+.console-box {
+  background: #000;
+  color: #0f0;
+  padding: 10px;
+  height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  margin-top: 10px;
 }
 </style>
 </head>
 <body>
 
 <h2>HTML + JavaScript Runner</h2>
-
-<p>Pega aquí tu código HTML + JS:</p>
 
 <textarea id="code">
 <h1>Hello</h1>
@@ -32,20 +37,36 @@ iframe {
 </script>
 </textarea>
 
-<br><br>
+<br>
 <button onclick="run()">Ejecutar</button>
 
+<h3>Salida:</h3>
 <iframe id="output"></iframe>
+
+<h3>Consola:</h3>
+<div id="console" class="console-box"></div>
 
 <script>
 function run() {
     const code = document.getElementById("code").value;
     const iframe = document.getElementById("output");
     const doc = iframe.contentDocument || iframe.contentWindow.document;
+    const consoleBox = document.getElementById("console");
+    consoleBox.innerHTML = ""; // limpiar consola
 
-    // Escribimos el HTML directamente dentro del iframe
+    // HTML + consola personalizada en el iframe
+    const html = `
+      <script>
+        const parentConsole = parent.document.getElementById("console");
+        console.log = function(msg){
+          parentConsole.innerHTML += msg + "<br>";
+        };
+      <\/script>
+      ${code}
+    `;
+
     doc.open();
-    doc.write(code);
+    doc.write(html);
     doc.close();
 }
 </script>
