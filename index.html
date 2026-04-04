@@ -27,12 +27,18 @@ iframe {
   margin-top: 20px;
   border: 1px solid #aaa;
 }
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Editor en tiempo real</h2>
+<h2>Editor con ejecución manual</h2>
 
 <div class="editors">
   <textarea id="html" placeholder="HTML"></textarea>
@@ -40,18 +46,17 @@ iframe {
   <textarea id="js" placeholder="JavaScript"></textarea>
 </div>
 
+<button onclick="runCode()">Ejecutar</button>
+
 <iframe id="output"></iframe>
 
 <script>
-const htmlInput = document.getElementById("html");
-const cssInput = document.getElementById("css");
-const jsInput = document.getElementById("js");
-const iframe = document.getElementById("output");
+function runCode() {
+  const html = document.getElementById("html").value;
+  const css = document.getElementById("css").value;
+  const js = document.getElementById("js").value;
 
-function update() {
-  const html = htmlInput.value;
-  const css = cssInput.value;
-  const js = jsInput.value;
+  const iframe = document.getElementById("output");
 
   const code = `
     <!DOCTYPE html>
@@ -71,17 +76,10 @@ function update() {
   iframe.srcdoc = code;
 }
 
-// Ejecutar en tiempo real
-htmlInput.addEventListener("input", update);
-cssInput.addEventListener("input", update);
-jsInput.addEventListener("input", update);
-
-// Código inicial de ejemplo
-htmlInput.value = "<h1>Hola mundo</h1>";
-cssInput.value = "h1 { color: blue; }";
-jsInput.value = "console.log('JS funcionando');";
-
-update();
+// Código de ejemplo inicial
+document.getElementById("html").value = "<h1>Hola mundo</h1>";
+document.getElementById("css").value = "h1 { color: blue; }";
+document.getElementById("js").value = "console.log('Funciona correctamente');";
 </script>
 
 </body>
