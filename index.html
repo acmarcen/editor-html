@@ -12,10 +12,22 @@ body {
 
 textarea {
   width: 100%;
-  height: 160px;
+  height: 220px;
   font-family: monospace;
   font-size: 14px;
   padding: 10px;
+}
+
+.editors-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.editor-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -54,16 +66,26 @@ iframe {
 
 <h2>Editor de HTML, CSS y JavaScript</h2>
 
-<h3>HTML</h3>
-<textarea id="htmlInput"></textarea>
+<div class="editors-container">
 
-<h3>CSS</h3>
-<textarea id="cssInput"></textarea>
+  <div class="editor-box">
+    <h3>HTML</h3>
+    <textarea id="htmlInput"></textarea>
+  </div>
 
-<h3>JavaScript</h3>
-<textarea id="jsInput"></textarea>
+  <div class="editor-box">
+    <h3>CSS</h3>
+    <textarea id="cssInput"></textarea>
+  </div>
 
-<button onclick="runCode()" style="margin-top:15px; padding:10px 20px;">Ejecutar</button>
+  <div class="editor-box">
+    <h3>JavaScript</h3>
+    <textarea id="jsInput"></textarea>
+  </div>
+
+</div>
+
+<button onclick="runCode()" style="padding:10px 20px;">Ejecutar</button>
 
 <div class="container">
 
